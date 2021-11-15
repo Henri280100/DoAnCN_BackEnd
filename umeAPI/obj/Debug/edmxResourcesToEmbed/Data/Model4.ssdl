@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatUmeDTBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="idComment" />
+    </Key>
+    <Property Name="idComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="createOn" Type="datetime" Nullable="false" />
+    <Property Name="content" Type="nvarchar" MaxLength="2000" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idPoster" Type="int" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Friends">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idFriend" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idFriend" Type="int" Nullable="false" />
+    <Property Name="addDay" Type="datetime" />
+    <Property Name="nickName" Type="nvarchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="GroupChat">
+    <Key>
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numberMember" Type="int" />
+    <Property Name="avartaGroup" Type="varchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="updateOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="groupChatMessage">
+    <Key>
+      <PropertyRef Name="idMess" />
+    </Key>
+    <Property Name="idMess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+    <Property Name="toUserId" Type="int" Nullable="false" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="isGim" Type="bit" />
+  </EntityType>
+  <EntityType Name="InfoGroup">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+    <Property Name="dateJoin" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Liked">
+    <Key>
+      <PropertyRef Name="idPoster" />
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="isLike" Type="bit" />
+    <Property Name="idPoster" Type="int" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="dateAction" Type="datetime" Nullable="false" />
+    <Property Name="updateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="toUserId" Type="int" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="20" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="IisGim" Type="bit" />
+    <Property Name="viewOn" Type="datetime" />
+    <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Poster">
+    <Key>
+      <PropertyRef Name="idPoster" />
+    </Key>
+    <Property Name="idPoster" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imgPoster" Type="varchar" MaxLength="800" />
+    <Property Name="content" Type="nvarchar" MaxLength="3000" />
+    <Property Name="createOn" Type="datetime" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="likeNumber" Type="int" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="16" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="updateOn" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isOnline" Type="bit" />
+    <Property Name="sex" Type="bit" />
+    <Property Name="birthDay" Type="date" />
+    <Property Name="email" Type="varchar(max)" />
+    <Property Name="urlAvarta" Type="varchar(max)" />
+    <Property Name="userName" Type="nvarchar" MaxLength="200" />
+    <Property Name="code" Type="int" />
+  </EntityType>
+  <EntityType Name="UserNotification">
+    <Key>
+      <PropertyRef Name="idNotification" />
+    </Key>
+    <Property Name="idNotification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isRead" Type="bit" />
+    <Property Name="content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="creataOn" Type="datetime" />
+    <Property Name="readOn" Type="datetime" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idPerson" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ChatUmeDTBModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupChat" EntityType="Self.GroupChat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="groupChatMessage" EntityType="Self.groupChatMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InfoGroup" EntityType="Self.InfoGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Liked" EntityType="Self.Liked" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Poster" EntityType="Self.Poster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserNotification" EntityType="Self.UserNotification" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

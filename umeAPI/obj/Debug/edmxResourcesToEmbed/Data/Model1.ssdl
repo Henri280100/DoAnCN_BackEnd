@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppChatUmeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="idComment" />
+    </Key>
+    <Property Name="idComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="createOn" Type="datetime" Nullable="false" />
+    <Property Name="content" Type="nvarchar" MaxLength="2000" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idPoster" Type="int" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="GroupChat">
+    <Key>
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numberMember" Type="int" />
+    <Property Name="avartaGroup" Type="varchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="updateOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="groupChatMessage">
+    <Key>
+      <PropertyRef Name="idMess" />
+    </Key>
+    <Property Name="idMess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="20" />
+    <Property Name="toUserId" Type="int" Nullable="false" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="isGim" Type="bit" />
+  </EntityType>
+  <EntityType Name="InfoGroup">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idGroup" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" Nullable="false" />
+    <Property Name="dateJoin" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Liked">
+    <Key>
+      <PropertyRef Name="idPoster" />
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="isLike" Type="bit" />
+    <Property Name="idPoster" Type="int" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="dateAction" Type="datetime" Nullable="false" />
+    <Property Name="updateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="toUserId" Type="int" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="20" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="IisGim" Type="bit" />
+    <Property Name="viewOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Poster">
+    <Key>
+      <PropertyRef Name="idPoster" />
+    </Key>
+    <Property Name="idPoster" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imgPoster" Type="varchar" MaxLength="800" />
+    <Property Name="content" Type="nvarchar" MaxLength="3000" />
+    <Property Name="createOn" Type="datetime" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="likeNumber" Type="int" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="commentNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="16" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="updateOn" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="sex" Type="bit" />
+    <Property Name="birthDay" Type="date" />
+    <Property Name="email" Type="varchar" MaxLength="2000" />
+    <Property Name="userName" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAvarta">
+    <Key>
+      <PropertyRef Name="idAvarta" />
+    </Key>
+    <Property Name="idAvarta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="url" Type="varchar" MaxLength="200" />
+    <Property Name="createOn" Type="datetime" />
+    <Property Name="updateOn" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserNotification">
+    <Key>
+      <PropertyRef Name="idNotification" />
+    </Key>
+    <Property Name="idNotification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isRead" Type="bit" />
+    <Property Name="content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="creataOn" Type="datetime" />
+    <Property Name="readOn" Type="datetime" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Comment__idPoste__114A936A">
+    <End Role="Poster" Type="Self.Poster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poster">
+        <PropertyRef Name="idPoster" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="idPoster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__idUser__10566F31">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groupChat__idGro__3E52440B">
+    <End Role="GroupChat" Type="Self.GroupChat" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="groupChatMessage" Type="Self.groupChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupChat">
+        <PropertyRef Name="idGroup" />
+      </Principal>
+      <Dependent Role="groupChatMessage">
+        <PropertyRef Name="idGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groupChat__idUse__3D5E1FD2">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="groupChatMessage" Type="Self.groupChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="groupChatMessage">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InfoGroup__idGro__35BCFE0A">
+    <End Role="GroupChat" Type="Self.GroupChat" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InfoGroup" Type="Self.InfoGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupChat">
+        <PropertyRef Name="idGroup" />
+      </Principal>
+      <Dependent Role="InfoGroup">
+        <PropertyRef Name="idGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InfoGroup__idUse__34C8D9D1">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InfoGroup" Type="Self.InfoGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="InfoGroup">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Liked__idPoster__0B91BA14">
+    <End Role="Poster" Type="Self.Poster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Liked" Type="Self.Liked" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poster">
+        <PropertyRef Name="idPoster" />
+      </Principal>
+      <Dependent Role="Liked">
+        <PropertyRef Name="idPoster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Liked__idUser__0C85DE4D">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Liked" Type="Self.Liked" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Liked">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Message__idUser__2E1BDC42">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserAvart__idUse__29572725">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserAvarta" Type="Self.UserAvarta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="UserAvarta">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserNotif__idUse__571DF1D5">
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserNotification" Type="Self.UserNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="UserNotification">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AppChatUmeModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupChat" EntityType="Self.GroupChat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="groupChatMessage" EntityType="Self.groupChatMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InfoGroup" EntityType="Self.InfoGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Liked" EntityType="Self.Liked" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Poster" EntityType="Self.Poster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAvarta" EntityType="Self.UserAvarta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserNotification" EntityType="Self.UserNotification" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Comment__idPoste__114A936A" Association="Self.FK__Comment__idPoste__114A936A">
+      <End Role="Poster" EntitySet="Poster" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__idUser__10566F31" Association="Self.FK__Comment__idUser__10566F31">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groupChat__idGro__3E52440B" Association="Self.FK__groupChat__idGro__3E52440B">
+      <End Role="GroupChat" EntitySet="GroupChat" />
+      <End Role="groupChatMessage" EntitySet="groupChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groupChat__idUse__3D5E1FD2" Association="Self.FK__groupChat__idUse__3D5E1FD2">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="groupChatMessage" EntitySet="groupChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InfoGroup__idGro__35BCFE0A" Association="Self.FK__InfoGroup__idGro__35BCFE0A">
+      <End Role="GroupChat" EntitySet="GroupChat" />
+      <End Role="InfoGroup" EntitySet="InfoGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InfoGroup__idUse__34C8D9D1" Association="Self.FK__InfoGroup__idUse__34C8D9D1">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="InfoGroup" EntitySet="InfoGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Liked__idPoster__0B91BA14" Association="Self.FK__Liked__idPoster__0B91BA14">
+      <End Role="Poster" EntitySet="Poster" />
+      <End Role="Liked" EntitySet="Liked" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Liked__idUser__0C85DE4D" Association="Self.FK__Liked__idUser__0C85DE4D">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="Liked" EntitySet="Liked" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Message__idUser__2E1BDC42" Association="Self.FK__Message__idUser__2E1BDC42">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserAvart__idUse__29572725" Association="Self.FK__UserAvart__idUse__29572725">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="UserAvarta" EntitySet="UserAvarta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserNotif__idUse__571DF1D5" Association="Self.FK__UserNotif__idUse__571DF1D5">
+      <End Role="UserAccount" EntitySet="UserAccount" />
+      <End Role="UserNotification" EntitySet="UserNotification" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

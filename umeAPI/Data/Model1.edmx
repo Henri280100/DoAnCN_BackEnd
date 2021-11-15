@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChatUmeDTBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="idComment" />
+          </Key>
+          <Property Name="idComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="createOn" Type="datetime" Nullable="false" />
+          <Property Name="content" Type="nvarchar" MaxLength="2000" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idPoster" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idFriend" />
+          </Key>
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idFriend" Type="int" Nullable="false" />
+          <Property Name="addDay" Type="datetime" />
+          <Property Name="nickName" Type="nvarchar" MaxLength="200" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupChat">
+          <Key>
+            <PropertyRef Name="idGroup" />
+          </Key>
+          <Property Name="idGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numberMember" Type="int" />
+          <Property Name="avartaGroup" Type="varchar" MaxLength="200" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="createOn" Type="datetime" />
+          <Property Name="updateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="groupChatMessage">
+          <Key>
+            <PropertyRef Name="idMess" />
+          </Key>
+          <Property Name="idMess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idGroup" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="toUserId" Type="int" Nullable="false" />
+          <Property Name="createOn" Type="datetime" />
+          <Property Name="isGim" Type="bit" />
+        </EntityType>
+        <EntityType Name="InfoGroup">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idGroup" />
+          </Key>
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idGroup" Type="int" Nullable="false" />
+          <Property Name="dateJoin" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Liked">
+          <Key>
+            <PropertyRef Name="idPoster" />
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="isLike" Type="bit" />
+          <Property Name="idPoster" Type="int" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="dateAction" Type="datetime" Nullable="false" />
+          <Property Name="updateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="toUserId" Type="int" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="createOn" Type="datetime" />
+          <Property Name="IisGim" Type="bit" />
+          <Property Name="viewOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Poster">
+          <Key>
+            <PropertyRef Name="idPoster" />
+          </Key>
+          <Property Name="idPoster" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imgPoster" Type="varchar" MaxLength="800" />
+          <Property Name="content" Type="nvarchar" MaxLength="3000" />
+          <Property Name="createOn" Type="datetime" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="likeNumber" Type="int" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="16" />
+          <Property Name="createOn" Type="datetime" />
+          <Property Name="updateOn" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="isOnline" Type="bit" />
+          <Property Name="sex" Type="bit" />
+          <Property Name="birthDay" Type="date" />
+          <Property Name="email" Type="varchar" MaxLength="2000" />
+          <Property Name="userName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserAvarta">
+          <Key>
+            <PropertyRef Name="idAvarta" />
+          </Key>
+          <Property Name="idAvarta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="200" />
+          <Property Name="createOn" Type="datetime" />
+          <Property Name="updateOn" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserNotification">
+          <Key>
+            <PropertyRef Name="idNotification" />
+          </Key>
+          <Property Name="idNotification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isRead" Type="bit" />
+          <Property Name="content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="creataOn" Type="datetime" />
+          <Property Name="readOn" Type="datetime" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idPerson" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ChatUmeDTBModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupChat" EntityType="Self.GroupChat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groupChatMessage" EntityType="Self.groupChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoGroup" EntityType="Self.InfoGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liked" EntityType="Self.Liked" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poster" EntityType="Self.Poster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAvarta" EntityType="Self.UserAvarta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserNotification" EntityType="Self.UserNotification" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChatUmeDTBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="idComment" />
+          </Key>
+          <Property Name="idComment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="createOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="content" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idPoster" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idFriend" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idFriend" Type="Int32" Nullable="false" />
+          <Property Name="addDay" Type="DateTime" Precision="3" />
+          <Property Name="nickName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GroupChat">
+          <Key>
+            <PropertyRef Name="idGroup" />
+          </Key>
+          <Property Name="idGroup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numberMember" Type="Int32" />
+          <Property Name="avartaGroup" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="createOn" Type="DateTime" Precision="3" />
+          <Property Name="updateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="groupChatMessage">
+          <Key>
+            <PropertyRef Name="idMess" />
+          </Key>
+          <Property Name="idMess" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idGroup" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="toUserId" Type="Int32" Nullable="false" />
+          <Property Name="createOn" Type="DateTime" Precision="3" />
+          <Property Name="isGim" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="InfoGroup">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idGroup" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idGroup" Type="Int32" Nullable="false" />
+          <Property Name="dateJoin" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Liked">
+          <Key>
+            <PropertyRef Name="idPoster" />
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="isLike" Type="Boolean" />
+          <Property Name="idPoster" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="dateAction" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="toUserId" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="createOn" Type="DateTime" Precision="3" />
+          <Property Name="IisGim" Type="Boolean" />
+          <Property Name="viewOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Poster">
+          <Key>
+            <PropertyRef Name="idPoster" />
+          </Key>
+          <Property Name="idPoster" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imgPoster" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="createOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="likeNumber" Type="Int32" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="createOn" Type="DateTime" Precision="3" />
+          <Property Name="updateOn" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isOnline" Type="Boolean" />
+          <Property Name="sex" Type="Boolean" />
+          <Property Name="birthDay" Type="DateTime" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserAvarta">
+          <Key>
+            <PropertyRef Name="idAvarta" />
+          </Key>
+          <Property Name="idAvarta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="createOn" Type="DateTime" Precision="3" />
+          <Property Name="updateOn" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserNotification">
+          <Key>
+            <PropertyRef Name="idNotification" />
+          </Key>
+          <Property Name="idNotification" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isRead" Type="Boolean" />
+          <Property Name="content" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="creataOn" Type="DateTime" Precision="3" />
+          <Property Name="readOn" Type="DateTime" Precision="3" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ChatUmeDTBEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Friends" EntityType="Self.Friend" />
+          <EntitySet Name="GroupChats" EntityType="Self.GroupChat" />
+          <EntitySet Name="groupChatMessages" EntityType="Self.groupChatMessage" />
+          <EntitySet Name="InfoGroups" EntityType="Self.InfoGroup" />
+          <EntitySet Name="Likeds" EntityType="Self.Liked" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Posters" EntityType="Self.Poster" />
+          <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
+          <EntitySet Name="UserAvartas" EntityType="Self.UserAvarta" />
+          <EntitySet Name="UserNotifications" EntityType="Self.UserNotification" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChatUmeDTBModelStoreContainer" CdmEntityContainer="ChatUmeDTBEntities4">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="idComment" ColumnName="idComment" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idFriend" ColumnName="idFriend" />
+                <ScalarProperty Name="addDay" ColumnName="addDay" />
+                <ScalarProperty Name="nickName" ColumnName="nickName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupChats">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.GroupChat">
+              <MappingFragment StoreEntitySet="GroupChat">
+                <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+                <ScalarProperty Name="numberMember" ColumnName="numberMember" />
+                <ScalarProperty Name="avartaGroup" ColumnName="avartaGroup" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groupChatMessages">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.groupChatMessage">
+              <MappingFragment StoreEntitySet="groupChatMessage">
+                <ScalarProperty Name="idMess" ColumnName="idMess" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="toUserId" ColumnName="toUserId" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="isGim" ColumnName="isGim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoGroups">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.InfoGroup">
+              <MappingFragment StoreEntitySet="InfoGroup">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+                <ScalarProperty Name="dateJoin" ColumnName="dateJoin" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Likeds">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.Liked">
+              <MappingFragment StoreEntitySet="Liked">
+                <ScalarProperty Name="isLike" ColumnName="isLike" />
+                <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="dateAction" ColumnName="dateAction" />
+                <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="toUserId" ColumnName="toUserId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="IisGim" ColumnName="IisGim" />
+                <ScalarProperty Name="viewOn" ColumnName="viewOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posters">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.Poster">
+              <MappingFragment StoreEntitySet="Poster">
+                <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+                <ScalarProperty Name="imgPoster" ColumnName="imgPoster" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="likeNumber" ColumnName="likeNumber" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isOnline" ColumnName="isOnline" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAvartas">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.UserAvarta">
+              <MappingFragment StoreEntitySet="UserAvarta">
+                <ScalarProperty Name="idAvarta" ColumnName="idAvarta" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="createOn" ColumnName="createOn" />
+                <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNotifications">
+            <EntityTypeMapping TypeName="ChatUmeDTBModel.UserNotification">
+              <MappingFragment StoreEntitySet="UserNotification">
+                <ScalarProperty Name="idNotification" ColumnName="idNotification" />
+                <ScalarProperty Name="isRead" ColumnName="isRead" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="creataOn" ColumnName="creataOn" />
+                <ScalarProperty Name="readOn" ColumnName="readOn" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

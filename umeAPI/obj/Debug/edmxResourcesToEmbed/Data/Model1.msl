@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppChatUmeModelStoreContainer" CdmEntityContainer="AppChatUmeEntities1">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="AppChatUmeModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="idComment" ColumnName="idComment" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupChats">
+      <EntityTypeMapping TypeName="AppChatUmeModel.GroupChat">
+        <MappingFragment StoreEntitySet="GroupChat">
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="numberMember" ColumnName="numberMember" />
+          <ScalarProperty Name="avartaGroup" ColumnName="avartaGroup" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groupChatMessages">
+      <EntityTypeMapping TypeName="AppChatUmeModel.groupChatMessage">
+        <MappingFragment StoreEntitySet="groupChatMessage">
+          <ScalarProperty Name="idMess" ColumnName="idMess" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="toUserId" ColumnName="toUserId" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="isGim" ColumnName="isGim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoGroups">
+      <EntityTypeMapping TypeName="AppChatUmeModel.InfoGroup">
+        <MappingFragment StoreEntitySet="InfoGroup">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="dateJoin" ColumnName="dateJoin" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likeds">
+      <EntityTypeMapping TypeName="AppChatUmeModel.Liked">
+        <MappingFragment StoreEntitySet="Liked">
+          <ScalarProperty Name="isLike" ColumnName="isLike" />
+          <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="dateAction" ColumnName="dateAction" />
+          <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="AppChatUmeModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="toUserId" ColumnName="toUserId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="IisGim" ColumnName="IisGim" />
+          <ScalarProperty Name="viewOn" ColumnName="viewOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posters">
+      <EntityTypeMapping TypeName="AppChatUmeModel.Poster">
+        <MappingFragment StoreEntitySet="Poster">
+          <ScalarProperty Name="idPoster" ColumnName="idPoster" />
+          <ScalarProperty Name="imgPoster" ColumnName="imgPoster" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="likeNumber" ColumnName="likeNumber" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="commentNumber" ColumnName="commentNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccounts">
+      <EntityTypeMapping TypeName="AppChatUmeModel.UserAccount">
+        <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAvartas">
+      <EntityTypeMapping TypeName="AppChatUmeModel.UserAvarta">
+        <MappingFragment StoreEntitySet="UserAvarta">
+          <ScalarProperty Name="idAvarta" ColumnName="idAvarta" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="createOn" ColumnName="createOn" />
+          <ScalarProperty Name="updateOn" ColumnName="updateOn" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserNotifications">
+      <EntityTypeMapping TypeName="AppChatUmeModel.UserNotification">
+        <MappingFragment StoreEntitySet="UserNotification">
+          <ScalarProperty Name="idNotification" ColumnName="idNotification" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="creataOn" ColumnName="creataOn" />
+          <ScalarProperty Name="readOn" ColumnName="readOn" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
